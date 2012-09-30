@@ -1,0 +1,21 @@
+"Character Mapping" = 'Unicode'
+"Start Symbol" = <Expression>
+
+Identifier = {Letter}{AlphaNumeric}*
+           
+Number = {Digit}+('.'{Digit}+)?([eE][+-]?{Digit}+)?
+
+<Expression>  ::= <Expression> '+' <Mult Exp> 
+               |  <Expression> '-' <Mult Exp> 
+               |  <Mult Exp> 
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
+               |  <Mult Exp> '/' <Negate Exp> 
+               |  <Negate Exp> 
+
+<Negate Exp>  ::= '-' <Value> 
+               |  <Value> 
+
+<Value>       ::= Identifier
+               | Number
+               | '(' <Expression> ')'

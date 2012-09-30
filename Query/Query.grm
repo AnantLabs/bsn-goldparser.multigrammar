@@ -1,0 +1,15 @@
+"Character Mapping" = 'Unicode'
+"Start Symbol" = <View Stmt>
+
+Identifier = {Letter}{AlphaNumeric}*
+           
+Expression @= { Source = Virtual }
+              
+<View Stmt> ::= VIEW Identifier <View Param Opt>
+<View Param Opt> ::= <View Param> <View Param Opt> | <>
+<View Param> ::= <OrderBy Clause> | <Where Clause> | <Optimize Clause> | <Preload Clause>
+<Where Clause> ::= WHERE Expression
+<OrderBy Clause> ::= ORDER BY Identifier
+<Optimize Clause> ::= OPTIMIZE Identifier
+<Preload Clause> ::= PRELOAD
+

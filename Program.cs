@@ -1,11 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+using MultiGrammar.Expression;
+using MultiGrammar.Query;
+
+using bsn.GoldParser.Grammar;
+using bsn.GoldParser.Semantic;
 
 namespace MultiGrammar {
-	class Program {
-		static void Main(string[] args) {
+	internal class Program {
+		private static void Main(string[] args) {
+			SemanticTypeActions<QueryToken> queryActions = new SemanticTypeActions<QueryToken>(CompiledGrammar.Load(typeof(QueryToken), "Query.cgt"));
+			queryActions.Initialize(true);
+			SemanticTypeActions<ExpressionToken> expressionActions = new SemanticTypeActions<ExpressionToken>(CompiledGrammar.Load(typeof(QueryToken), "Expression.cgt"));
+			expressionActions.Initialize(true);
 		}
 	}
 }
