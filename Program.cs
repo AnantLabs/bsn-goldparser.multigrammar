@@ -11,7 +11,7 @@ namespace MultiGrammar {
 		private static void Main(string[] args) {
 			SemanticTypeActions<QueryToken> queryActions = new SemanticTypeActions<QueryToken>(CompiledGrammar.Load(typeof(QueryToken), "Query.cgt"));
 			queryActions.Initialize(true);
-			SemanticTypeActions<ExpressionToken> expressionActions = new SemanticTypeActions<ExpressionToken>(CompiledGrammar.Load(typeof(QueryToken), "Expression.cgt"));
+			SemanticTypeActions<ExpressionToken> expressionActions = new SemanticTypeActions<ExpressionToken>(CompiledGrammar.Load(typeof(ExpressionToken), "Expression.cgt"));
 			expressionActions.Initialize(true);
 		}
 	}
