@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 using MultiGrammar.Expression;
@@ -11,15 +12,19 @@ namespace MultiGrammar.Query {
 	public class QueryTokenizer: Tokenizer<QueryToken> {
 		private readonly SemanticActions<ExpressionToken> expressionActions;
 		private readonly Symbol expressionSymbol;
+		private readonly HashSet<Symbol> grammarSwitchSymbols;
+		private readonly Symbol predicateSymbol;
 		private readonly SemanticActions<QueryToken> queryActions;
-		private readonly Symbol whereSymbol;
 		private bool expectExpression;
 
 		public QueryTokenizer(TextReader textReader, SemanticActions<QueryToken> queryActions, SemanticActions<ExpressionToken> expressionActions): base(textReader, queryActions.Grammar) {
 			this.queryActions = queryActions;
 			this.expressionActions = expressionActions;
 			expressionSymbol = queryActions.Grammar.GetSymbolByName("Expression");
-			whereSymbol = queryActions.Grammar.GetSymbolByName("WHERE");
+			predicateSymbol = queryActions.Grammar.GetSymbolByName("Predicate");
+			grammarSwitchSymbols = new HashSet<Symbol> {
+					queryActions.Grammar.GetSymbolByName("WHERE")
+			};
 		}
 
 		public SemanticActions<QueryToken> QueryActions {
@@ -34,8 +39,16 @@ namespace MultiGrammar.Query {
 				ParseMessage message = processor.ParseAll();
 				if (message == ParseMessage.Accept) {
 					expectExpression = false;
-					token = ExpressionHandle.Create((Expression.Expression)processor.CurrentToken, expressionSymbol);
-					return ParseMessage.TokenRead;
+					Expression<bool> predicate = processor.CurrentToken as Expression<bool>;
+					if (predicate != null) {
+						token = ExpressionHandle<bool>.Create(predicate, predicateSymbol);
+						return ParseMessage.TokenRead;
+					}
+					Expression<double> expression = processor.CurrentToken as Expression<double>;
+					if (expression != null) {
+						token = ExpressionHandle<double>.Create(expression, expressionSymbol);
+						return ParseMessage.TokenRead;
+					}
 				}
 				token = QueryToken.Create(Grammar.ErrorSymbol, new LineInfo(InputIndex, LineNumber, LineColumn));
 				return ParseMessage.LexicalError;
@@ -48,7 +61,7 @@ namespace MultiGrammar.Query {
 			if (!queryActions.TryGetTerminalFactory(tokenSymbol, out factory)) {
 				throw new InvalidOperationException("Factory not found for terminal "+tokenSymbol.Name);
 			}
-			expectExpression = (tokenSymbol == whereSymbol);
+			expectExpression = grammarSwitchSymbols.Contains(tokenSymbol);
 			return factory.CreateAndInitialize(tokenSymbol, tokenPosition, text);
 		}
 	}

@@ -1,9 +1,38 @@
 "Character Mapping" = 'Unicode'
-"Start Symbol" = <Expression>
+"Start Symbol" = <Program>
 
 Identifier = {Letter}{AlphaNumeric}*
            
+Eq = '=='|'='
+   
+Neq = '!='|'<>'
+    
+Boolean = 'true'|'false'
+           
 Number = {Digit}+('.'{Digit}+)?([eE][+-]?{Digit}+)?
+       
+<Program>     ::= <Expression>
+               |  <Predicate>
+
+<Predicate>   ::= <Predicate> OR <And Pred>
+               |  <And Pred>
+
+<And Pred>    ::= <And Pred> AND <Comparison>
+               |  <Comparison>
+               
+<Comparison>  ::= <Expression> Eq <Expression>
+               |  <Expression> Neq <Expression>
+               |  <Expression> '>=' <Expression>
+               |  <Expression> '>' <Expression>
+               |  <Expression> '<=' <Expression>
+               |  <Expression> '<' <Expression>
+               |  <Not Pred>
+               
+<Not Pred>    ::= NOT <Boolean>
+               |  <Boolean>
+               
+<Boolean>     ::= Boolean
+               |  '(' <Predicate> ')'
 
 <Expression>  ::= <Expression> '+' <Mult Exp> 
                |  <Expression> '-' <Mult Exp> 

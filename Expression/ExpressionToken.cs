@@ -7,6 +7,7 @@ using bsn.GoldParser.Parser;
 using bsn.GoldParser.Semantic;
 
 [assembly: RuleTrim("<Value> ::= '(' <Expression> ')'", "<Expression>", SemanticTokenType = typeof(ExpressionToken))]
+[assembly: RuleTrim("<Boolean> ::= '(' <Predicate> ')'", "<Predicate>", SemanticTokenType = typeof(ExpressionToken))]
 
 namespace MultiGrammar.Expression {
 	[Terminal("(EOF)")]

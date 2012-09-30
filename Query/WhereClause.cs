@@ -2,16 +2,16 @@ using bsn.GoldParser.Semantic;
 
 namespace MultiGrammar.Query {
 	public class WhereClause: ViewParam {
-		private readonly ExpressionHandle expression;
+		private readonly ExpressionHandle<bool> predicate;
 
-		[Rule("<Where Clause> ::= ~WHERE Expression")]
-		public WhereClause(ExpressionHandle expression) {
-			this.expression = expression;
+		[Rule("<Where Clause> ::= ~WHERE Predicate")]
+		public WhereClause(ExpressionHandle<bool> predicate) {
+			this.predicate = predicate;
 		}
 
-		public ExpressionHandle Expression {
+		public ExpressionHandle<bool> Predicate {
 			get {
-				return expression;
+				return predicate;
 			}
 		}
 	}

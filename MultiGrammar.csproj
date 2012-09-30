@@ -46,20 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Expression\DivideOperator.cs" />
+    <Compile Include="Expression\Operators\AndOperator.cs" />
+    <Compile Include="Expression\Operators\DivideOperator.cs" />
+    <Compile Include="Expression\Operators\EqOperator.cs" />
     <Compile Include="Expression\Expression.cs" />
     <Compile Include="Expression\ExpressionProcessor.cs" />
     <Compile Include="Expression\ExpressionToken.cs" />
     <Compile Include="Expression\ExpressionTokenizer.cs" />
     <Compile Include="Expression\GetNamedValue.cs" />
+    <Compile Include="Expression\Operators\GteOperator.cs" />
+    <Compile Include="Expression\Operators\GtOperator.cs" />
     <Compile Include="Expression\IComputationContext.cs" />
     <Compile Include="Expression\Identifier.cs" />
-    <Compile Include="Expression\MinusOperator.cs" />
-    <Compile Include="Expression\MultiplyOperator.cs" />
-    <Compile Include="Expression\Number.cs" />
+    <Compile Include="Expression\Operators\LteOperator.cs" />
+    <Compile Include="Expression\Operators\LtOperator.cs" />
+    <Compile Include="Expression\Operators\MinusOperator.cs" />
+    <Compile Include="Expression\Operators\MultiplyOperator.cs" />
+    <Compile Include="Expression\Operators\NeqOperator.cs" />
+    <Compile Include="Expression\Constant.cs" />
     <Compile Include="Expression\Operation.cs" />
-    <Compile Include="Expression\Operator.cs" />
-    <Compile Include="Expression\PlusOperator.cs" />
+    <Compile Include="Expression\Operators\OrOperator.cs" />
+    <Compile Include="Expression\Operators\XorOperator.cs" />
+    <Compile Include="Expression\Operators\Operator.cs" />
+    <Compile Include="Expression\Operators\PlusOperator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\ExpressionHandle.cs" />

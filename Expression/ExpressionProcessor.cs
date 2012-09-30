@@ -17,6 +17,14 @@ namespace MultiGrammar.Expression {
 			return false;
 		}
 
+		protected override ExpressionToken CreateReduction(Rule rule, IList<ExpressionToken> children) {
+			SemanticNonterminalFactory<ExpressionToken> factory;
+			if (!tokenizer.Actions.TryGetNonterminalFactory(rule, out factory)) {
+				throw new InvalidOperationException("Factory not found for rule "+rule.Name);
+			}
+			return factory.CreateAndInitialize(rule, children);
+		}
+
 		protected override bool RetrySyntaxError(ref ExpressionToken currentToken) {
 			IToken token = currentToken;
 			if (tokenizer.HandleErrorAsEof && (token.Symbol.Kind != SymbolKind.End)) {
@@ -25,14 +33,6 @@ namespace MultiGrammar.Expression {
 				return true;
 			}
 			return base.RetrySyntaxError(ref currentToken);
-		}
-
-		protected override ExpressionToken CreateReduction(Rule rule, IList<ExpressionToken> children) {
-			SemanticNonterminalFactory<ExpressionToken> factory;
-			if (!tokenizer.Actions.TryGetNonterminalFactory(rule, out factory)) {
-				throw new InvalidOperationException("Factory not found for rule "+rule.Name);
-			}
-			return factory.CreateAndInitialize(rule, children);
 		}
 	}
 }

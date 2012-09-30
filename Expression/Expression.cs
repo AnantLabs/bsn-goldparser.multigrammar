@@ -1,5 +1,5 @@
 namespace MultiGrammar.Expression {
-	public abstract class Expression: ExpressionToken {
-		public abstract double Compute(IComputationContext context);
+	public abstract class Expression<TOut>: ExpressionToken {
+		public abstract TOut Compute(IComputationContext context);
 	}
 }

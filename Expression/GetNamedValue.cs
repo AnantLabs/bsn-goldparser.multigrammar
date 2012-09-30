@@ -1,7 +1,7 @@
 using bsn.GoldParser.Semantic;
 
 namespace MultiGrammar.Expression {
-	public class GetNamedValue: Expression {
+	public class GetNamedValue: Expression<double> {
 		private readonly string name;
 
 		[Rule("<Value> ::= Identifier")]

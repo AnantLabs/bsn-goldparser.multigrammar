@@ -15,7 +15,7 @@ namespace MultiGrammar {
 			queryActions.Initialize(true);
 			SemanticTypeActions<ExpressionToken> expressionActions = new SemanticTypeActions<ExpressionToken>(CompiledGrammar.Load(typeof(ExpressionToken), "Expression.cgt"));
 			expressionActions.Initialize(true);
-			string input = "VIEW a WHERE 1 + x ORDER BY y";
+			string input = "VIEW a WHERE x = 20 ORDER BY y";
 			using (StringReader reader = new StringReader(input)) {
 				QueryProcessor processor = new QueryProcessor(new QueryTokenizer(reader, queryActions, expressionActions));
 				ParseMessage message = processor.ParseAll();
