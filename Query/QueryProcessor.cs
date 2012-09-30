@@ -21,7 +21,7 @@ namespace MultiGrammar.Query {
 
 		protected override QueryToken CreateReduction(Rule rule, IList<QueryToken> children) {
 			SemanticNonterminalFactory<QueryToken> factory;
-			if (!tokenizer.Actions.TryGetNonterminalFactory(rule, out factory)) {
+			if (!tokenizer.QueryActions.TryGetNonterminalFactory(rule, out factory)) {
 				throw new InvalidOperationException("Factory not found for rule "+rule.Name);
 			}
 			return factory.CreateAndInitialize(rule, children);

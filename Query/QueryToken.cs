@@ -1,5 +1,7 @@
 ﻿using System;
 
+using bsn.GoldParser.Grammar;
+using bsn.GoldParser.Parser;
 using bsn.GoldParser.Semantic;
 
 namespace MultiGrammar.Query {
@@ -12,5 +14,11 @@ namespace MultiGrammar.Query {
 	[Terminal("PRELOAD")]
 	[Terminal("VIEW")]
 	[Terminal("WHERE")]
-	public class QueryToken: SemanticToken {}
+	public class QueryToken: SemanticToken {
+		internal static QueryToken Create(Symbol symbol, LineInfo position) {
+			QueryToken result = new QueryToken();
+			result.Initialize(symbol, position);
+			return result;
+		}
+	}
 }

@@ -17,6 +17,16 @@ namespace MultiGrammar.Expression {
 			return false;
 		}
 
+		protected override bool RetrySyntaxError(ref ExpressionToken currentToken) {
+			IToken token = currentToken;
+			if (tokenizer.HandleErrorAsEof && (token.Symbol.Kind != SymbolKind.End)) {
+				tokenizer.RollbackAndSetEnd();
+				currentToken = null;
+				return true;
+			}
+			return base.RetrySyntaxError(ref currentToken);
+		}
+
 		protected override ExpressionToken CreateReduction(Rule rule, IList<ExpressionToken> children) {
 			SemanticNonterminalFactory<ExpressionToken> factory;
 			if (!tokenizer.Actions.TryGetNonterminalFactory(rule, out factory)) {

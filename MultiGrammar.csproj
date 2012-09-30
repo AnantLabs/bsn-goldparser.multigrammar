@@ -62,7 +62,7 @@
     <Compile Include="Expression\PlusOperator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\Expression.cs" />
+    <Compile Include="Query\ExpressionHandle.cs" />
     <Compile Include="Query\Identifier.cs" />
     <Compile Include="Query\OptimizeClause.cs" />
     <Compile Include="Query\OrderByClause.cs" />
