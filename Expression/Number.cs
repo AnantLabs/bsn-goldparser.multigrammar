@@ -1,3 +1,5 @@
+using System.Globalization;
+
 using bsn.GoldParser.Semantic;
 
 namespace MultiGrammar.Expression {
@@ -9,7 +11,7 @@ namespace MultiGrammar.Expression {
 			this.value = value;
 		}
 
-		public Number(string value): this((double)double.Parse(value, NumberFormatInfo.InvariantInfo)) {}
+		public Number(string value): this(double.Parse(value, NumberFormatInfo.InvariantInfo)) {}
 
 		public double Value {
 			get {

@@ -48,7 +48,9 @@
   <ItemGroup>
     <Compile Include="Expression\DivideOperator.cs" />
     <Compile Include="Expression\Expression.cs" />
+    <Compile Include="Expression\ExpressionProcessor.cs" />
     <Compile Include="Expression\ExpressionToken.cs" />
+    <Compile Include="Expression\ExpressionTokenizer.cs" />
     <Compile Include="Expression\GetNamedValue.cs" />
     <Compile Include="Expression\IComputationContext.cs" />
     <Compile Include="Expression\Identifier.cs" />
@@ -65,7 +67,9 @@
     <Compile Include="Query\OptimizeClause.cs" />
     <Compile Include="Query\OrderByClause.cs" />
     <Compile Include="Query\PreloadClause.cs" />
+    <Compile Include="Query\QueryProcessor.cs" />
     <Compile Include="Query\QueryToken.cs" />
+    <Compile Include="Query\QueryTokenizer.cs" />
     <Compile Include="Query\ViewParam.cs" />
     <Compile Include="Query\ViewParamList.cs" />
     <Compile Include="Query\ViewStatement.cs" />
